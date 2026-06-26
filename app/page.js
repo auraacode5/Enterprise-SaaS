@@ -6,7 +6,13 @@ const fadeUp = {
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] } }),
 };
 
-const NAV_LINKS = ["Product", "Solutions", "Enterprise", "Pricing", "Docs"];
+const NAV_LINKS = [
+  { label: "Product",    href: "#features"  },
+  { label: "Solutions",  href: "#solutions" },
+  { label: "Enterprise", href: "#security"  },
+  { label: "Pricing",    href: "#pricing"   },
+  { label: "Docs",       href: "#faq"       },
+];
 const STATS = [
   { num: "40K+", label: "Companies worldwide" },
   { num: "99.9%", label: "Uptime SLA" },
@@ -32,7 +38,12 @@ export default function EnterpriseLanding() {
           nexus<span className="text-blue-600">.</span>
         </span>
         <div className="hidden md:flex items-center gap-7">
-          {NAV_LINKS.map((l) => <a key={l} href="#" className="text-[13px] font-medium text-gray-500 hover:text-blue-600 transition-colors no-underline">{l}</a>)}
+          {NAV_LINKS.map((l) => (
+  <a key={l.label} href={l.href}
+    onClick={(e) => { e.preventDefault(); const el = document.querySelector(l.href); if(el) el.scrollIntoView({ behavior: "smooth" }); }}
+    className="text-[13px] font-medium text-gray-500 hover:text-blue-600 transition-colors no-underline cursor-pointer"
+  >{l.label}</a>
+))}
         </div>
         <div className="flex items-center gap-2">
           <button className="text-[13px] font-medium text-gray-800 border border-gray-200 hover:border-blue-500 hover:text-blue-600 rounded-lg px-4 py-1.5 transition-colors bg-transparent cursor-pointer">Sign in</button>
